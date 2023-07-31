@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Dashboard {% endblock title %} 
+
+{% block content %}
+
+<section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
+  <h2>You are not authorized to access this page.</h2>
+  <a class="btn mb-2" href="javascript:history.go(-1);">Previous Page</a>
+  <a class="btn mb-2" href="{% url 'index' %}">Back to Home</a>
+  <img src="{% static 'niceAdmin/img/not-found.svg' %}" class="mt-5 img-fluid w-100" alt="You are not authorized to view this page!">
+</section>
+
+{% endblock content %}
+
+

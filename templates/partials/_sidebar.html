@@ -1,0 +1,34 @@
+  {% load static %}
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link {% if sidebarActive != "dashboard" %} collapsed {% endif %}" href="{% url 'index' %}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link {% if sidebarActive != "cpaas" %} collapsed {% endif %}" data-bs-target="#tables-nav-cpaas" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-envelope-open"></i><span>e-Mail</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav-cpaas" class="nav-content collapse {% if sidebarActive == "e-mail" %} show {% endif %}" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'createMailPage' %}" {% if altSidebarActive == "createMail" %}class="active"{% endif %}>
+              <i class="bi bi-circle"></i><span>Create e-Mail</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'sendMailPage' %}" {% if altSidebarActive == "sendMail" %}class="active"{% endif %}>
+              <i class="bi bi-circle"></i><span>Send e-Mail</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+    </ul>
+
+  </aside><!-- End Sidebar-->

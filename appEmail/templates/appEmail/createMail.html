@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+ 
+{% load static %}
+
+
+
+{% block title %} e-Mail - Create e-Mail {% endblock title %}
+
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<style>
+  #icon-container {
+    display: inline-block;
+
+    animation: rotating 2s linear infinite;
+
+  }
+
+  @keyframes rotating {
+    0% {
+      transform: rotate(0deg);
+      /* Başlangıç noktası */
+    }
+
+    100% {
+      transform: rotate(360deg);
+      /* Bitiş noktası */
+    }
+  }
+
+  /* Modal stilini belirle */
+  .alert {
+    display: none;
+  }
+</style>
+<div class="pagetitle">
+  <h1>e-Mail - Create e-Mail</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item active">e-Mail - Create e-Mail</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+
+<section class="section dashboard">
+
+  <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show" role="alert"
+    id="successAlert">
+    {{ success_message }}
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert"
+    id="failedAlert">
+    {{ success_message }}
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card" style="height: 390px; position: relative;">
+            <div class="card-body">
+              <h5 class="card-title">Create New E-Mail</h5>
+              <p></p>
+              <form name="mailTemplateForm" id="mailTemplateForm" method="POST" action="">
+                {% csrf_token %}
+                <div class="col-sm-12">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingName" placeholder="Marketing_Template"
+                      name="template_name">
+                    <label for="floatingName">E-Mail Template Name</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingSubject" placeholder="Subject"
+                      name="subject_part">
+                    <label for="floatingSubject">Subject</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingContent" placeholder="Mail Content"
+                      name="text_content">
+                    <label for="floatingContent">Mail Content</label>
+                  </div>
+                </div>
+                <div class="btn-group" style="width: 100%; top:20px; ">
+                  <button type="submit" class="btn btn-info" name="test_action_1">Create New
+                    Template</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Actions with e-Mail API</h5>
+              <p>Test actions</p>
+              <form method="POST" action="">
+                {% csrf_token %}
+                <div class="btn-group" style="width: 100%;">
+                  <button type="submit" class="btn btn-outline-secondary" name="test_action_1">Create New
+                    Template</button>
+                  <button type="submit" class="btn btn-outline-primary" name="test_action_2">Get Template
+                    Details</button>
+                  <button type="submit" class="btn btn-outline-secondary" name="test_action_3">List All
+                    Templates</button>
+                  <button type="submit" class="btn btn-outline-primary" name="test_action_4">Update Template</button>
+                  <button type="submit" class="btn btn-outline-secondary" name="test_action_5">Send E-Mail</button>
+                  <button type="submit" class="btn btn-outline-primary" name="test_action_6">Verify New E-Mail
+                    Sender</button>
+                  <button type="submit" class="btn btn-outline-primary" name="test_action_7">Verify New Domain</button>
+                  <button type="submit" class="btn btn-outline-primary" name="test_action_8">List Domains</button>
+                  <button type="submit" class="btn btn-outline-primary" name="test_action_9">Delete Domain</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ======= Footer ======= -->
+
+<script>
+
+  var successAlert = document.getElementById("successAlert");
+  var failedAlert = document.getElementById("failedAlert");
+
+  function showSuccessAlert() {
+    successAlert.style.display = "block";
+  }
+
+  function showFailedAlert() {
+    failedAlert.style.display = "block";
+  }
+
+</script>
+
+{% if success_message %}
+{% if success_message == "Successful"%}
+<script>showSuccessAlert();</script>
+{% else %}
+<script>showFailedAlert();</script>
+{% endif %}
+{% endif %}
+
+{% endblock content %}
